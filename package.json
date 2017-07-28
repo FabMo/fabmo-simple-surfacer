@@ -1,0 +1,16 @@
+{
+	"name": "FabMo Simple Surfacer",
+	"main": "./index.html",
+	"icon": "icon.svg",
+	"icon_color": "#fff",
+	"version": "0.0.1",
+	"author": "Brendan Collins",
+	"website": "http://shopbottools.com",
+	"id": "",
+	"description": "An app to surface your table",
+	"dependencies": {
+		"font-awesome": "^4.7.0",
+		"grunt": "^1.0.1",
+		"grunt-zip": "^0.17.1"
+	}
+}

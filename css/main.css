@@ -1,0 +1,26 @@
+body{
+    margin: 2rem;
+}
+
+#options {
+    position: fixed;
+    right: 20px;
+    top: 10px;
+}
+#add{
+    color: #3273dc;
+    cursor: pointer;
+}
+
+.dropdown-menu{
+    width: 18rem;
+}
+
+.label {
+    font-size: 14px;
+}
+
+.title{
+    margin-top: 1rem;
+}
+
