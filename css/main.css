@@ -24,3 +24,53 @@ body{
     margin-top: 1rem;
 }
 
+.routine p {
+    margin-right: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    .routine p {
+        font-size: 12px;
+    }
+
+}
+
+@media screen and (max-width: 450px) {
+    .routine p {
+        font-size: 10px;
+    }
+
+    .routines{
+        padding: 0.2rem;
+    }
+
+    body{
+        margin: 1rem;
+    }
+
+    .card h1 {
+        margin-bottom: 0.5rem;
+    }
+
+    .card{
+        max-width: 98%;
+    }
+
+    .column {
+        padding: 0.75rem 0 0.75rem 0;
+    }
+
+}
+
+@media screen and (max-width: 370px) {
+    .routine p {
+        font-size: 9px;
+    }
+
+    .dropdown-menu{
+        width: 16rem;
+    }
+    .label:not(:last-child){
+            margin-bottom: 0em;
+    } 
+}
