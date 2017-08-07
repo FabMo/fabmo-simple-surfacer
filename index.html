@@ -23,13 +23,16 @@
   <div class="modal-background"></div>
   <div class="modal-content">
     <div class="card">
+        <div class="card-header has-text-centered">
+            <p class="card-header-title">Confirm</p>
+        </div>
         <div class="card-content has-text-centered">
             <div classs=" ">
-                <p>Is your Z-Axis corrextly Zeroed?</p>
+                <p class="directions">Is your Z-Axis correctly zeroed?</p>
                 </br>
                 
-                <div class="button okay is-success ">Yes</div>
-                <div class="button cancel is-danger ">No</div>
+                <div class="button is-medium okay is-success ">Yes</div>
+                <div class="button is-medium cancel is-danger ">No</div>
             </div>
         </div>
     </div>
@@ -39,11 +42,11 @@
         <div class="column card ">
             <h1 class="has-text-centered">Surfacing Routines</h1>
             <div class="card-content has-text-centered routines">
-                <div class="button is-success routine" data-height="24" data-width="36">
+                <div class="button is-success routine" data-height="" data-width="">
                     <p class="bit" data-val="1.25">1.25"</p>
-                    <p class="cut" data-val="pocket">Outside In Pocket</p> 
-                    <p class="depth" data-val="0.02">@0.02" deep</p>
-                    <p class="pass-over" data-val="0.35">&#38; 35% step over</p>
+                    <p class="cut" data-val="Pocket">Outside In Pocket</p> 
+                    <p class="depth" data-val="0.03">@0.03" deep</p>
+                    <p class="pass-over" data-val="35">&#38; 35% step over</p>
                 </div>
             </div>
         </div>
@@ -58,38 +61,38 @@
                 <div class="dropdown-item">
                     <label class="label">Surfacing Bit Diameter</label>
                     <div class="control">
-                        <input class="input is-info" type="text" placeholder="inches">
+                        <input class="input is-info bitInput" type="text" placeholder="inches">
                     </div>
                 </div>
                 <div class="dropdown-item">
                     <label class="label">Surface Height</label>
                     <div class="control">
-                        <input class="input is-info" type="text" placeholder="inches">
+                        <input class="input is-info heightInput" type="text" placeholder="inches">
                     </div>
                 </div>
                 <div class="dropdown-item">
                     <label class="label">Surface Width</label>
                     <div class="control">
-                        <input class="input is-info" type="text" placeholder="inches">
+                        <input class="input is-info widthInput" type="text" placeholder="inches">
                     </div>
                 </div>
                 <div class="dropdown-item">
                     <label class="label">Cut Depth</label>
                     <div class="control">
-                        <input class="input is-info" type="text" placeholder="inches">
+                        <input class="input is-info depthInput" type="text" placeholder="inches">
                     </div>
                 </div>
                 <div class="dropdown-item">
                     <label class="label">Step Over Percent</label>
                     <div class="control">
-                        <input class="input is-info" type="text" placeholder="percent">
+                        <input class="input is-info stepInput" type="text" placeholder="percent">
                     </div>
                 </div>
                 <div class="dropdown-item">
                     <label class="label">Surfacing Type</label>
                     <div class="control">
                         <div class="select is-info">
-                        <select>
+                        <select class="surfacetypeInput">
                             <option>Raster</option>
                             <option>Pocket</option>>
                         </select>
@@ -98,10 +101,9 @@
                 </div>
                 <div >
                     <div class="dropdown-item has-text-centered">
-                         <div class="button  is-primary ">Add Routine</div>
+                         <div class="button  is-primary add">Add Routine</div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 

@@ -27,6 +27,9 @@ body{
 .routine p {
     margin-right: 5px;
 }
+ .routine {
+        margin-bottom: 0.5rem;
+ }
 
 @media screen and (max-width: 600px) {
     .routine p {
