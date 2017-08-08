@@ -58,7 +58,7 @@ $('.add').click(function(){
     } else {
         var surfaceText = 'Raster';
     }
-    var html = '<div class="button is-success routine" data-height="'+height+'" data-width="'+width+'"><p class="bit" data-val="'+bit+'">'+bit+'"</p><p class="cut" data-val="'+surfacetype+'">'+surfaceText+'</p> <p class="depth" data-val="'+depth+'">@'+depth+'" deep</p><p class="pass-over" data-val="'+step+'">&#38; '+(step*100)+'% step over</p></div>'
+    var html = '<div class="button is-success routine" data-height="'+height+'" data-width="'+width+'"><p class="bit" data-val="'+bit+'">'+bit+'"</p><p class="cut" data-val="'+surfacetype+'">'+surfaceText+'</p> <p class="depth" data-val="'+depth+'">@'+depth+'" deep</p><p class="pass-over" data-val="'+step+'">&#38; '+(step)+'% step over</p></div>'
     buttons.push(html);
     $('.routines').append(html);
     fabmo.setAppConfig({'buttons' : buttons});
@@ -66,24 +66,44 @@ $('.add').click(function(){
 
 
 $('.routines').on('click', '.routine', function(e){
-    var that = $(this);
+   
+    var that = $(this); 
     fabmo.getConfig(function(err, data) {
             if (err){
                 console.log(err);
             } else {
+                    jobItems.bitDiam = that.find('.bit').data('val');
+                    jobItems.width = that.data('width') || parseInt(data.machine.envelope.xmax) - parseInt(data.machine.envelope.xmin);
+                    jobItems.height = that.data('height') || parseInt(data.machine.envelope.ymax) - parseInt(data.machine.envelope.ymin);
+                    jobItems.feedrate = that.data('feedrate');
+                    jobItems.cut = that.find('.cut').data('val');
+                    jobItems.depth = that.find('.depth').data('val');
+                    jobItems.passOver = that.find('.pass-over').data('val');
+                if (e.target.id === 'edit') {
+                    dropdown.classList.toggle('is-active');
+                    $('.bitInput').val(jobItems.bitDiam);
+                    $('.heightInput').val(jobItems.height);
+                    $('.widthInput').val(jobItems.width);
+                    $('.depthInput').val(jobItems.depth);
+                    $('.stepInput').val(jobItems.passOver);
+                    $('.surfacetypeInput').val(jobItems.cut);
+                    $('.feedrateInput').val(jobItems.feedrate);
+                    $('.add').off().html('Save').click(function(){
+                        that.find('.bit').data('val', $('.bitInput').val());
+                        that.data('height', $('.heightInput').val());
+                        that.data('width', $('.widthInput').val());
+                        that.data('feedrate', $('.feedrateInput').val());
+                        that.find('.cut').data('val', $('.surfacetypeInput').val());
+                        that.find('.depth').data('val',$('.depthInput').val());
+                        that.find('.pass-over').data('val', $('.stepInput').val());
+                    });
+                
+                } else { 
+                  
                 $('.okay, .cancel').show().off();
                 $('.okay').html('Yes');
                 $('.cancel').html('No');
                 $('.directions').html('Is your Z-Axis correctly zeroed?');
-
-                    jobItems.bitDiam = that.find('.bit').data('val');
-                    jobItems.width = that.data('width') || parseInt(data.machine.envelope.xmax) - parseInt(data.machine.envelope.xmin);
-                    jobItems.height = that.data('height') || parseInt(data.machine.envelope.ymax) - parseInt(data.machine.envelope.ymin);
-                    jobItems.cut = that.find('.cut').data('val');
-                    jobItems.depth = that.find('.depth').data('val');
-                    jobItems.passOver = that.find('.pass-over').data('val');
-                
-
                 $('.modal').addClass('is-active');
                 
                 $('.okay').click(function(){
@@ -118,7 +138,7 @@ $('.routines').on('click', '.routine', function(e){
                         $('.modal').removeClass('is-active');
                     });
                 });
-
+            }
             }
     });
     
@@ -139,7 +159,8 @@ makeJob = function(jobItems){
     g+='m4\n'
     g+='g4p2\n'
     g+='g0z1\n'
-    g+='g1f480\n'
+    g+='g1f240\n'
+
     if( jobItems.cut === "Pocket"){
         for (var i = 1; i < (passes+1); i++){
             g+='g0x0y0\n'
