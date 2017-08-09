@@ -25,11 +25,14 @@ body{
 }
 
 .routine p {
-    margin-right: 5px;
+    margin-right: 2px;
 }
  .routine {
         margin-bottom: 0.5rem;
+        overflow: auto;
         min-width: 520px;
+        justify-content: flex-start;
+       
  }
 
  .dropdown-item{
@@ -40,49 +43,34 @@ body{
      font-size: .9rem;
  }
 
+ .actions {
+     margin-left: auto;
+     display: inline-block;
+ }
+
 
 
   .delete{
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    background-color: rgba(10, 10, 10, 0.2);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-     display: inline-block; 
-    -webkit-box-flex: 0;
-    -ms-flex-positive: 0;
-    flex-grow: 0;
-    -ms-flex-negative: 0;
-    flex-shrink: 0;
-    font-size: 1.3rem;
+
     height: 30px;
     max-height: 30px;
     max-width: 30px;
     min-height: 30px;
     min-width: 30px;
-    outline: none;
-    position: relative; 
-    vertical-align: top;
-    width: 30px;
 
  } 
 
 
 
-.edit {
+.edit, .trash {
     display: inline-block;
     font-size: 20px;
-    padding: 0px 10px;
+    margin-left: 5px;
+
 
 }
 
-.edit i {
+.edit i, .trash i {
   background-color: rgba(10, 10, 10, 0.2);
   border-radius: 50%;
   width: 30px;
@@ -92,6 +80,7 @@ body{
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  
 }
 
 .edit i:hover{
@@ -103,7 +92,9 @@ body{
     .routine p {
         font-size: 12px;
     }
-
+    .routine {
+        min-width: 90%;;
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -127,13 +118,32 @@ body{
         max-width: 98%;
     }
 
+    .routine {
+        min-width: 98%;;
+    }
+
     .column {
         padding: 0.75rem 0 0.75rem 0;
     }
 
+    .edit, .trash {
+        font-size: 12px;
+        
+    }
+
+    .edit i, .trash i {
+        height: 25px;
+    max-height: 25px;
+    max-width: 25px;
+    min-height: 25px;
+    min-width: 25px;
+    width: 25px;
+    }
+
+
 }
 
-@media screen and (max-width: 370px) {
+@media screen and (max-width: 340px) {
     .routine p {
         font-size: 9px;
     }
@@ -144,4 +154,44 @@ body{
     .label:not(:last-child){
             margin-bottom: 0em;
     } 
+
+    .edit, .trash {
+        font-size: 10px;
+        
+    }
+
+    .edit i, .trash i {
+        height: 20px;
+    max-height: 20px;
+    max-width: 20px;
+    min-height: 20px;
+    min-width: 20px;
+    width: 20px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .routine p {
+        font-size: 8px;
+    }
+
+    .dropdown-menu{
+        width: 16rem;
+    }
+
+    .edit, .trash {
+        font-size: 8px;
+        transform: translateY(-3px);
+        
+    }
+
+    .edit i, .trash i {
+        height: 16px;
+    max-height: 16px;
+    max-width: 16px;
+    min-height: 16px;
+    min-width: 16px;
+    width: 16px;
+
+    }
 }

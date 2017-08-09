@@ -3,9 +3,17 @@ var add = document.getElementById('add');
 var fabmo = new FabMoDashboard();
 var lastStat = null;
 var jobItems = {};
-var buttons;
+var buttons = [' <div class="button is-success routine" data-height="" data-width="" data-feedrate="4"><p class="bit" data-val="1.25">1.25"</p><p class="cut" data-val="Pocket">Outside In Pocket</p> <p class="depth" data-val="0.03">@0.03" deep</p><p class="pass-over" data-val="35">&#38; 35% step over</p><div class="actions"><div class="edit"><i id="edit"class="fa fa-pencil" aria-hidden="true"></i></div><div  class="trash"><i id="delete" class="fa fa-times" aria-hidden="true"></i></div></div></div>'];
 add.onclick = function(){
     dropdown.classList.toggle('is-active');
+    $('.dropdown-item input').val('');
+    $('.add').off().html('Add Routine').click(function(){
+        var html = makeRoutine();
+        buttons.push(html);
+        $('.routines').append(html);
+        fabmo.setAppConfig({'buttons' : buttons});
+        
+    });
 };
 
 fabmo.getAppConfig(function(err, myConfig) {
@@ -13,13 +21,16 @@ fabmo.getAppConfig(function(err, myConfig) {
         console.log(err);
     } else {
         if (myConfig.buttons) {
-
-            for (var i = 0; i < myConfig.buttons.length; i++ ){
-                $('.routines').append(myConfig.buttons[i]);
+            if(myConfig.buttons.length > 0){
+                buttons = myConfig.buttons;
+            } else {
+                 buttons = [' <div class="button is-success routine" data-height="" data-width="" data-feedrate="4"><p class="bit" data-val="1.25">1.25"</p><p class="cut" data-val="Pocket">Outside In Pocket</p> <p class="depth" data-val="0.03">@0.03" deep</p><p class="pass-over" data-val="35">&#38; 35% step over</p><div class="actions"><div class="edit"><i id="edit"class="fa fa-pencil" aria-hidden="true"></i></div><div  class="trash"><i id="delete" class="fa fa-times" aria-hidden="true"></i></div></div></div>'];
             }
-            buttons = myConfig.buttons;
+            for (var i = 0; i < buttons.length; i++ ){
+                $('.routines').append(buttons[i]);
+            }
         } else {
-            buttons = [];
+           $('.routines').append(buttons[0]);
         }
     }
 });		
@@ -43,8 +54,8 @@ function onStatus(status) {
     }
 
 }
+function makeRoutine (){
 
-$('.add').click(function(){
     dropdown.classList.toggle('is-active');
     var bit = $('.bitInput').val();
     var height = $('.heightInput').val();
@@ -52,22 +63,30 @@ $('.add').click(function(){
     var depth = $('.depthInput').val();
     var step = $('.stepInput').val();
     var surfacetype = $('.surfacetypeInput').val();
-    
+    var feedRate = $('.feedrateInput').val();
     if (surfacetype === "Pocket") {
         var surfaceText = 'Outside In Pocket';
     } else {
         var surfaceText = 'Raster';
     }
-    var html = '<div class="button is-success routine" data-height="'+height+'" data-width="'+width+'"><p class="bit" data-val="'+bit+'">'+bit+'"</p><p class="cut" data-val="'+surfacetype+'">'+surfaceText+'</p> <p class="depth" data-val="'+depth+'">@'+depth+'" deep</p><p class="pass-over" data-val="'+step+'">&#38; '+(step)+'% step over</p></div>'
+    var html = '<div class="button is-success routine" data-height="'+height+'" data-width="'+width+'" data-feedrate="'+feedRate +'"><p class="bit" data-val="'+bit+'">'+bit+'"</p><p class="cut" data-val="'+surfacetype+'">'+surfaceText+'</p> <p class="depth" data-val="'+depth+'">@'+depth+'" deep</p><p class="pass-over" data-val="'+step+'">&#38; '+(step)+'% step over</p> <div class="actions"><div class="edit"><i id="edit"class="fa fa-pencil" aria-hidden="true"></i></div><div  class="trash"><i id="delete" class="fa fa-times" aria-hidden="true"></i></div></div></div>';
+    return html;
+}
+$('.add').click(function(){
+    var html = makeRoutine();
     buttons.push(html);
     $('.routines').append(html);
     fabmo.setAppConfig({'buttons' : buttons});
+    $('.dropdown-item input').val('');
 });
 
 
 $('.routines').on('click', '.routine', function(e){
    
-    var that = $(this); 
+    var that = $(this);
+    var index = $('.routine').index(this); 
+    console.log(that); 
+    var currentHTMl = this.toString();
     fabmo.getConfig(function(err, data) {
             if (err){
                 console.log(err);
@@ -89,21 +108,30 @@ $('.routines').on('click', '.routine', function(e){
                     $('.surfacetypeInput').val(jobItems.cut);
                     $('.feedrateInput').val(jobItems.feedrate);
                     $('.add').off().html('Save').click(function(){
-                        that.find('.bit').data('val', $('.bitInput').val());
-                        that.data('height', $('.heightInput').val());
-                        that.data('width', $('.widthInput').val());
-                        that.data('feedrate', $('.feedrateInput').val());
-                        that.find('.cut').data('val', $('.surfacetypeInput').val());
-                        that.find('.depth').data('val',$('.depthInput').val());
-                        that.find('.pass-over').data('val', $('.stepInput').val());
+                       
+                        var html = makeRoutine();
+                        that.replaceWith(html);
+                        $('.add').off().html('Add Routine').click(function(){
+                            var html = makeRoutine();
+                            buttons.push(html);
+                            $('.routines').append(html);
+                            fabmo.setAppConfig({'buttons' : buttons});
+                            $('.dropdown-item input').val('');
+                        });
+                        
+                        buttons[index] = html;
+                        fabmo.setAppConfig({'buttons' : buttons});
                     });
                 
-                } else { 
+                } else if (e.target.id === 'delete'){
+                    that.remove();
+                    buttons.splice(index, 1);
+                } else  { 
                   
                 $('.okay, .cancel').show().off();
                 $('.okay').html('Yes');
                 $('.cancel').html('No');
-                $('.directions').html('Is your Z-Axis correctly zeroed?');
+                $('.directions').html('Is your Z-Axis correctly zeroed to the surface of your table?');
                 $('.modal').addClass('is-active');
                 
                 $('.okay').click(function(){
@@ -150,6 +178,7 @@ makeJob = function(jobItems){
     var b = jobItems.bitDiam;
     var po = (jobItems.passOver/100);
     var depth = jobItems.depth;
+    var fr = (jobItems.feedrate*60);
 
     var passes = Math.ceil(depth/0.03); //known safe pass depth
     var passDepth = parseFloat((depth/passes).toFixed(4));
@@ -159,7 +188,7 @@ makeJob = function(jobItems){
     g+='m4\n'
     g+='g4p2\n'
     g+='g0z1\n'
-    g+='g1f240\n'
+    g+='g1f'+fr+'\n'
 
     if( jobItems.cut === "Pocket"){
         for (var i = 1; i < (passes+1); i++){
