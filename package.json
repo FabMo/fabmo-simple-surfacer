@@ -3,7 +3,7 @@
 	"main": "./index.html",
 	"icon": "icon.svg",
 	"icon_color": "#fff",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"author": "Brendan Collins",
 	"website": "http://shopbottools.com",
 	"id": "",

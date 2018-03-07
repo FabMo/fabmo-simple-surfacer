@@ -224,7 +224,7 @@ makeJob = function(jobItems){
 
              }
             }  
-            g+="G10 L20 P2 Z0" 
+            g+="G10 L20 P2 Z0\n" 
             g+="g0z1\n"
             g+="m5\n"
             g+="m30\n"
@@ -262,7 +262,7 @@ makeJob = function(jobItems){
                 }
              }
          }
-            g+="G10 L20 P2 Z0" 
+            g+="G10 L20 P2 Z0\n" 
             g+="g0z1\n"
             g+="m5\n"
             g+="m30\n"  
