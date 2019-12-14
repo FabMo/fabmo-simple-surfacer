@@ -3,7 +3,7 @@ var add = document.getElementById('add');
 var fabmo = new FabMoDashboard();
 var lastStat = null;
 var jobItems = {};
-var buttons = [' <div class="button is-success routine" data-height="" data-width="" data-feedrate="4"><p class="bit" data-val="1.25">1.25"</p><p class="cut" data-val="Pocket">Outside In Pocket</p> <p class="depth" data-val="0.03">@0.03" deep</p><p class="pass-over" data-val="35">&#38; 35% step over</p><div class="actions"><div class="edit"><i id="edit"class="fa fa-pencil" aria-hidden="true"></i></div><div  class="trash"><i id="delete" class="fa fa-times" aria-hidden="true"></i></div></div></div>'];
+var buttons = [' <div class="button is-success routine" data-height="" data-width="" data-feedrate="4"><p class="bit" data-val="1.25">1.25"</p><p class="cut" data-val="Pocket">Outside In Pocket</p> <p class="depth" data-val="0.025">@0.025" deep</p><p class="pass-over" data-val="35">&#38; 35% step over</p><div class="actions"><div class="edit"><i id="edit"class="fa fa-pencil" aria-hidden="true"></i></div><div  class="trash"><i id="delete" class="fa fa-times" aria-hidden="true"></i></div></div></div>'];
 add.onclick = function(){
     dropdown.classList.toggle('is-active');
     $('.dropdown-item input').val('');
@@ -24,7 +24,7 @@ fabmo.getAppConfig(function(err, myConfig) {
             if(myConfig.buttons.length > 0){
                 buttons = myConfig.buttons;
             } else {
-                 buttons = [' <div class="button is-success routine" data-height="" data-width="" data-feedrate="4"><p class="bit" data-val="1.25">1.25"</p><p class="cut" data-val="Pocket">Outside In Pocket</p> <p class="depth" data-val="0.03">@0.03" deep</p><p class="pass-over" data-val="35">&#38; 35% step over</p><div class="actions"><div class="edit"><i id="edit"class="fa fa-pencil" aria-hidden="true"></i></div><div  class="trash"><i id="delete" class="fa fa-times" aria-hidden="true"></i></div></div></div>'];
+                 buttons = [' <div class="button is-success routine" data-height="" data-width="" data-feedrate="4"><p class="bit" data-val="1.25">1.25"</p><p class="cut" data-val="Pocket">Outside In Pocket</p> <p class="depth" data-val="0.025">@0.025" deep</p><p class="pass-over" data-val="35">&#38; 35% step over</p><div class="actions"><div class="edit"><i id="edit"class="fa fa-pencil" aria-hidden="true"></i></div><div  class="trash"><i id="delete" class="fa fa-times" aria-hidden="true"></i></div></div></div>'];
             }
             for (var i = 0; i < buttons.length; i++ ){
                 $('.routines').append(buttons[i]);

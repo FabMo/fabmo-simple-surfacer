@@ -3,10 +3,10 @@
 	"main": "./index.html",
 	"icon": "icon.svg",
 	"icon_color": "#fff",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"author": "Brendan Collins",
 	"website": "http://shopbottools.com",
-	"id": "",
+	"id": "simple-surfacer",
 	"description": "An app to surface your table",
 	"dependencies": {
 		"font-awesome": "^4.7.0",
