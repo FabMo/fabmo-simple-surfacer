@@ -124,6 +124,7 @@ $('.routines').on('click', '.routine', function(e){
                     });
                 
                 } else if (e.target.id === 'delete'){
+console.log("gotDelete- ", that)
                     that.remove();
                     buttons.splice(index, 1);
                 } else  { 
