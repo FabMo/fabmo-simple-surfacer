@@ -10,7 +10,7 @@
 	"description": "An app to surface your table",
 	"dependencies": {
 		"font-awesome": "^4.7.0",
-		"grunt": "^1.0.1",
+		"grunt": "^1.5.3",
 		"grunt-zip": "^0.17.1"
 	}
 }
